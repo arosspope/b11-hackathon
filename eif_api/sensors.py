@@ -7,6 +7,13 @@ from types import WeatherUnit
 from types import LoginUnit
 from types import PeopleUnit
 
+class Sensor():
+
+    def __init__(self, family, unit, subCode):
+        self.family = family
+        self.unit = unit
+        self.subCode = subCode
+
 
 class SensorGroup():
     """Blah."""
