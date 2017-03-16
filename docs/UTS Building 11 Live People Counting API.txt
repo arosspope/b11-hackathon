@@ -27,3 +27,5 @@ http://hummingbird.feit.uts.edu.au:8080/peopleCounterApi/live/PC1030-Level10Brid
 http://hummingbird.feit.uts.edu.au:8080/peopleCounterApi/live/PC1131-Level11BridgeEast
 http://hummingbird.feit.uts.edu.au:8080/peopleCounterApi/live/PC1132-SchoolOfCivil
 http://hummingbird.feit.uts.edu.au:8080/peopleCounterApi/live/PC1133-Level11StairsUp
+
+Refreshrate: instanttaneous (5 - 10 secs)

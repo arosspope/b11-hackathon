@@ -1,3 +1,4 @@
+from eif_api import types
 import requests
 
 
@@ -7,8 +8,17 @@ class Data():
     DATE_FORMAT = "%Y-%m-%dT%I:%M:%S"
 
     @staticmethod
+    def livePersonCount(unit):
+        """Gets the live person count for that unit."""
+
+        r = requests.get('http://hummingbird.feit.uts.edu.au:8080/peopleCounterApi/live/' + unit.value)
+
+        return (r.status_code, r.json())
+
+    @staticmethod
     def retrieve(startDate, endDate, family, unit, subCode):
         """Will get data."""
+
         payload = {
             'rFromDate': startDate.strftime(Data.DATE_FORMAT),
             'rToDate': endDate.strftime(Data.DATE_FORMAT),

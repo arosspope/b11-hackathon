@@ -5,7 +5,9 @@ from eif_api.data import Data
 fromDate = datetime(2017, 3, 9, 11, 32, 27)
 toDate = datetime(2017, 3, 11, 11, 32, 27)
 
-(rc, jsonData) = Data.retrieve(fromDate, toDate, types.SensorFamily.WASP, types.WaspUnit.ES_B_08_422_7BDC, types.WaspSubCode.OXYGEN)
+#(rc, jsonData) = Data.retrieve(fromDate, toDate, types.SensorFamily.WASP, types.WaspUnit.ES_B_08_422_7BDC, types.WaspSubCode.OXYGEN)
+
+(rc, jsonData) = Data.livePersonCount(types.PeopleUnit.FIRE_1)
 
 print(rc)
 print(jsonData)
