@@ -54,9 +54,9 @@ itr = 0
 for exit in exits:
     po = peopleOut(fromDate, toDate, exit[1])
     percentLeaving = po / totalOut
-    print(str(percentLeaving))
+    print(exit[1].value + " " + str(percentLeaving))
     if(percentLeaving > 0.65):
         exit[0] = True
 
 for (blocked, unit) in exits:
-    print(str(blocked))
+    print("congeted:" + str(blocked))
