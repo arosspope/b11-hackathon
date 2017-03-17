@@ -1,10 +1,24 @@
-from types import SensorFamily
-from types import WaspUnit
-from types import WaspSubCode
-from types import EmbedUnit
-from types import EmbedSubCode
-from types import WeatherUnit
-from types import LoginUnit
+from .types import SensorFamily
+from .types import WaspUnit
+from .types import WaspSubCode
+from .types import EmbedUnit
+from .types import EmbedSubCode
+from .types import WeatherUnit
+from .types import LoginUnit
+from .types import PeopleUnit
+
+class PersonSensor():
+
+    def __init__(self, family, unit):
+        self.family = family
+        self.unit = unit
+
+class FireSensor():
+
+    def __init__(self, family, unit, subCode):
+        self.family = family
+        self.unit = unit
+        self.subCode = subCode
 
 
 class SensorGroup():
@@ -78,3 +92,6 @@ LOGINS_GROUP = SensorGroup(SensorFamily.LOGINS,
         LoginUnit.E1_B11V3, LoginUnit.E1_B1203, LoginUnit.E1_B1204,
         LoginUnit.E1_B1400, LoginUnit.E1_B1401, LoginUnit.E1_B1402,
         LoginUnit.E1_B1403, LoginUnit.E1_B14V0, LoginUnit.E1_B14V1, LoginUnit.E1_B14V2, LoginUnit.E1_B14V3], [])
+
+PEOPLE_GROUP = SensorGroup(SensorFamily.PEOPLE,
+        [PeopleUnit.FIRE_1, PeopleUnit.FIRE_2, PeopleUnit.FIRE_3], [])

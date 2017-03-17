@@ -8,6 +8,7 @@ class SensorFamily(Enum):
     EMBED = 'embed'
     WEATHER = 'weather'
     LOGINS = 'logins'
+    PEOPLE = 'people'
 
 
 class WaspUnit(Enum):
@@ -54,6 +55,20 @@ class WaspUnit(Enum):
     ES_A_04_163_7C58 = 'ES_A_04_163_7C58'
     ES_A_07_294_7BBC = 'ES_A_07_294_7BBC'
     ES_A_11_300_7BCD = 'ES_A_11_300_7BCD'
+
+
+class PeopleUnit(Enum):
+    """Available people counters."""
+
+    # Note, these people counters are the most active in B11, so we'll
+    # assign them to fire exits to simulate alot of activity during a fire
+    FIRE_1 = 'PC0216-JonesStEntrance'
+    FIRE_2 = 'PC0007-WattleStB10Entrance'
+    FIRE_3 = 'PC0214-BroadwayEastEntrance'
+    PC02_15_IN = ' PC02.15 (In)'
+    PC02_15_OUT = ' PC02.15 (Out)'
+    PC02_16_IN = ' PC02.16 (In)'
+    PC02_16_OUT = ' PC02.16 (Out)'
 
 
 class WaspSubCode(Enum):
