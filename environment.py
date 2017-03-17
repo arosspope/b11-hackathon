@@ -1,34 +1,35 @@
-from datetime import datetime
-from eif_api import types
+import datetime
 from eif_api.data import Data
+
 
 class FloorPlan():
 
-    def __init__(self, fireExits, rooms, fireSensors):
+    def __init__(self, fireExits, fireSensors):
         self.fireExits = fireExits
-        self.rooms = rooms
         self.fireSensors = fireSensors
         self.hazards = []
-        self.exitMap = [[0 for x in range(12)] for y in range(4)]  # TODO: Don't use hardcoded range
-        self.roomMap = [[0 for x in range(12)] for y in range(4)]
-        self.fireSensorMap = [[0 for x in range(12)] for y in range(4)]
+        self.totalPeopleOnFloor = 0
+        # self.updateTotalPeopleOnFloor()
 
-        # Update map with interesting places
-        for(exit in self.fireExits):
-            x, y = exit.location
-            self.exitMap[x][y] = exit
+    def updateTotalPeopleOnFloor(self):
+        self.totalPeopleOnFloor = 0
 
-        for(room in self.rooms):
-            x, y = room.location
-            self.roomMap[x][y] = room
+        for exit in self.fireExits:
+            exit.updatePeople()
+            self.totalPeopleOnFloor = self.totalPeopleOnFloor + (exit.peopleIn - exit.peopleOut)
 
-        for(sensor in self.fireSensors):
-            x, y = sensor.location
-            self.fireSensorMap[x][y] = sensor
 
-    def updateExits(self):
-        # TODO: For each exit, poll live people counter and determine which one needs to be blocked
-        # Also need to check if any of these exists are blocked
+    def updateHazards(self):
+        # Check if existing hazards have been removed
+        for hazard in self.hazards:
+            if not hazard.fireSensor.isFire():
+                self.hazards.remove(hazard)
+
+        for sensor in self.fireSensors:
+            if(sensor.isFire()):
+                hazard.append(Hazard(sensor.location, sensor))
+
+        # If hazrd on path we need to block corresponding fire exit
 
 
 class FireExit():
@@ -37,16 +38,25 @@ class FireExit():
         self.peopleUnit = peopleUnit
         self.blocked = False
         self.location = location
+        self.peopleOut = 0
+        self.peopleIn = 0
 
+    def updatePeople(self):
+        currentTime = datetime.datetime.now() - datetime.timedelta(days=1)
+        fiveMinutesAgo = currentTime - datetime.timedelta(minutes=5) - datetime.timedelta(days=1)
+        (rc, json) = Data.retrievePersonCount(fiveMinutesAgo, currentTime, self.peopleUnit.family, self.peopleUnit.unit)
+        self.peopleOut = json['out']
+        self.peopleIn = json['in']
+        return (self.peopleOut, self.peopleIn)
 
-class Room():
+class Hazard():
 
-    def __init__(self, location, fireExit):
+    def __init__(self, location, fireSensor):
         self.location = location
-        self.fireExit = fireExit
+        self.fireSensor = fireSensor
 
 
-class FireSensor():
+class HazardSensor():
 
     def __init__(self, sensor, location):
         self.sensor = sensor
@@ -55,11 +65,14 @@ class FireSensor():
     def isFire(self):
         currentTime = datetime.datetime.now()
         fiveMinutesAgo = currentTime - datetime.timedelta(minutes=5)
-        (rc, json) = Data.retrieve(fiveMinutesAgo, currentTime, self.sensor.family, self.sensor.unit, self.sensor.subCode)
+        # (rc, json) = Data.retrieve(fiveMinutesAgo, currentTime, self.sensor.family, self.sensor.unit, self.sensor.subCode)
 
-        for (attr, value) in json.iteritems():
-            print attr
-            print value
+        totalReading = 0
+        count = 0
+        #for (attr, value) in json.iteritems():
+        #    count = count + 1
+        #    totalReading = totalReading + value
 
-        # Add all values and find the average and see if its over a certain value and return boolean
-        return false
+        #avgTemp = totalReading/count
+
+        #return (avgTemp > 50)

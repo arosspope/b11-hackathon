@@ -65,6 +65,10 @@ class PeopleUnit(Enum):
     FIRE_1 = 'PC0216-JonesStEntrance'
     FIRE_2 = 'PC0007-WattleStB10Entrance'
     FIRE_3 = 'PC0214-BroadwayEastEntrance'
+    PC02_15_IN = ' PC02.15 (In)'
+    PC02_15_OUT = ' PC02.15 (Out)'
+    PC02_16_IN = ' PC02.16 (In)'
+    PC02_16_OUT = ' PC02.16 (Out)'
 
 
 class WaspSubCode(Enum):

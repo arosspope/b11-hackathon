@@ -1,13 +1,19 @@
-from types import SensorFamily
-from types import WaspUnit
-from types import WaspSubCode
-from types import EmbedUnit
-from types import EmbedSubCode
-from types import WeatherUnit
-from types import LoginUnit
-from types import PeopleUnit
+from .types import SensorFamily
+from .types import WaspUnit
+from .types import WaspSubCode
+from .types import EmbedUnit
+from .types import EmbedSubCode
+from .types import WeatherUnit
+from .types import LoginUnit
+from .types import PeopleUnit
 
-class Sensor():
+class PersonSensor():
+
+    def __init__(self, family, unit):
+        self.family = family
+        self.unit = unit
+
+class FireSensor():
 
     def __init__(self, family, unit, subCode):
         self.family = family
