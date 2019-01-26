@@ -1,5 +1,2 @@
-# hackathon
-Repo for ericsson hackathon
-
-## Dependencies
-* requests (install via pip3 install requests)
+# UTS Building 11 Hackathon
+A random collection of scripts that interact with the IoT sensors within UTS' Engineering building.
